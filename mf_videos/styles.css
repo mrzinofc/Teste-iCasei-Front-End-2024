@@ -1,0 +1,21 @@
+body {
+  font-family: Arial, sans-serif;
+}
+header {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+}
+#videos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.video {
+  width: 200px;
+  margin: 10px;
+  text-align: center;
+}
+.video img {
+  width: 100%;
+}

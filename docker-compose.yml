@@ -1,0 +1,21 @@
+# Para orquestrar os micro-frontend e o backend
+
+version: '3.9'
+
+services:
+  bff:
+    build: ./bff
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./bff/.env
+
+  mf_drawer:
+    build: ./mf_drawer
+    ports:
+      - "8080:8080"
+
+  mf_videos:
+    build: ./mf_videos
+    ports:
+      - "8081:8081"
