@@ -1,25 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MF Drawer</title>
+    <title>Sua Aplicação</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
     <div class="container">
-        <div class="drawer">
-            <h1>MF_DRAWER</h1>
-            <div class="drawer-links wireframe">
-                <div class="link-box">
-                    <a href="#videos">VÍDEOS</a>
-                </div>
-                <div class="link-box">
-                    <a href="#favorites">FAVORITOS</a>
-                </div>
-            </div>
-        </div>
         <div class="videos">
             <h1>MF_VIDEOS</h1>
             <div class="search-box">
@@ -27,41 +16,15 @@
                 <span class="search-icon material-symbols-outlined">search</span>
             </div>
             <div class="video-grid">
-                <!-- Exemplos de vídeos -->
-                <div class="video-box">
-                    <div class="play-button">&#9658;</div>
-                    <div class="favorite">&#9733;</div>
-                </div>
-                <div class="video-box">
-                    <div class="play-button">&#9658;</div>
-                    <div class="favorite">&#9733;</div>
-                </div>
-                <div class="video-box">
-                    <div class="play-button">&#9658;</div>
-                    <div class="favorite">&#9733;</div>
-                </div>
-                <div class="video-box">
-                    <div class="play-button">&#9658;</div>
-                    <div class="favorite">&#9733;</div>
-                </div>
-                <div class="video-box">
-                    <div class="play-button">&#9658;</div>
-                    <div class="favorite">&#9733;</div>
-                </div>
-                <div class="video-box">
-                    <div class="play-button">&#9658;</div>
-                    <div class="favorite">&#9733;</div>
-                </div>
-                <div class="video-box">
-                    <div class="play-button">&#9658;</div>
-                    <div class="favorite">&#9733;</div>
-                </div>
-                <div class="video-box">
-                    <div class="play-button">&#9658;</div>
-                    <div class="favorite">&#9733;</div>
-                </div>
-                <!-- Adicione mais vídeos conforme necessário -->
+                <!-- Vídeos serão adicionados dinamicamente aqui -->
             </div>
+        </div>
+        <div class="favorites">
+            <h1>FAVORITOS</h1>
+            <div class="favorite-video-grid">
+                <!-- Favoritos serão adicionados dinamicamente aqui -->
+            </div>
+            <p>Total de favoritos: <span class="favorites-count">0</span></p>
         </div>
     </div>
     <script src="main.js"></script>
