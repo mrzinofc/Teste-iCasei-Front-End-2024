@@ -13,9 +13,9 @@ services:
   mf_drawer:
     build: ./mf_drawer
     ports:
-      - "8080:8080"
+      - "8088:8080"
 
   mf_videos:
     build: ./mf_videos
     ports:
-      - "8081:8081"
+      - "8088:8081"

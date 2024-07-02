@@ -14,3 +14,4 @@ Este projeto contém duas aplicações micro-frontend: `mf_drawer` e `mf_videos`
 ```bash
 git clone <link_do_repositorio>
 cd <nome_do_repositorio>
+

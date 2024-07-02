@@ -1,20 +1,21 @@
-# Use a imagem base do Node.js
+# Use a imagem Node.js versão 14
 FROM node:14
 
-# Define o diretório de trabalho dentro do container
+# Cria diretório de trabalho no contêiner
 WORKDIR /app
 
-# Copia o package.json e package-lock.json
-COPY package*.json ./
+# Copia os arquivos necessários para o contêiner
+COPY package.json package-lock.json ./
 
-# Instala as dependências do frontend
+# Instala dependências
 RUN npm install
 
-# Copia o restante do código da aplicação
+# Copia o código da aplicação para o contêiner
 COPY . .
 
-# Serve a aplicação estática na porta 8080
-EXPOSE 8080
+# Expõe a porta 8088 para fora do contêiner
+EXPOSE 8088
 
 # Comando para iniciar a aplicação
-CMD ["npx", "http-server", "-p", "8080"]
+CMD ["node", "server.js"]
+

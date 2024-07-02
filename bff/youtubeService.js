@@ -8,7 +8,7 @@ async function searchVideos(query) {
         part: 'snippet',
         maxResults: 10,
         q: query,
-        key: 'YOUR_YOUTUBE_API_KEY'
+        key: 'AIzaSyCdgOWg2049C5NhI6XR7ndr5ymXdBbsB40'
       }
     });
     return response.data.items;

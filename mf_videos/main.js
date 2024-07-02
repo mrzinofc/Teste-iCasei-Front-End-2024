@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (searchQuery !== '') {
                 searchVideos(searchQuery);
             } else {
-                // Se o campo de busca estiver vazio, carrega os favoritos
                 if (favorites.length > 0) {
                     displayFavoriteVideos();
                 } else {
@@ -25,12 +24,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para buscar vídeos na API do YouTube
     function searchVideos(query) {
-        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${query}&key=${API_KEY}`;
+        const encodedQuery = encodeURIComponent(query); // Codifica a query para URL
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${encodedQuery}&key=${API_KEY}`;
         
         fetch(url)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro ao buscar vídeos: ${response.status} (${response.statusText})`);
+                }
+                return response.json();
+            })
             .then(data => {
-                displayVideos(data.items);
+                if (data.items && data.items.length > 0) {
+                    displayVideos(data.items);
+                } else {
+                    console.error('Nenhum vídeo encontrado.');
+                    videoGrid.innerHTML = 'Nenhum vídeo encontrado.';
+                }
             })
             .catch(error => console.error('Erro ao buscar vídeos:', error));
     }
@@ -134,40 +144,50 @@ document.addEventListener('DOMContentLoaded', function() {
         const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`;
         
         return fetch(url)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro ao buscar vídeo por ID: ${response.status} (${response.statusText})`);
+                }
+                return response.json();
+            })
             .then(data => {
-                const videoData = data.items[0];
-                const videoTitle = videoData.snippet.title;
-                const videoThumbnail = videoData.snippet.thumbnails.medium.url;
+                if (data.items && data.items.length > 0) {
+                    const videoData = data.items[0];
+                    const videoTitle = videoData.snippet.title;
+                    const videoThumbnail = videoData.snippet.thumbnails.medium.url;
 
-                const videoBox = document.createElement('div');
-                videoBox.classList.add('video-box');
-                videoBox.setAttribute('data-video-id', videoId);
+                    const videoBox = document.createElement('div');
+                    videoBox.classList.add('video-box');
+                    videoBox.setAttribute('data-video-id', videoId);
 
-                const thumbnail = document.createElement('img');
-                thumbnail.src = videoThumbnail;
-                thumbnail.alt = videoTitle;
-                videoBox.appendChild(thumbnail);
+                    const thumbnail = document.createElement('img');
+                    thumbnail.src = videoThumbnail;
+                    thumbnail.alt = videoTitle;
+                    videoBox.appendChild(thumbnail);
 
-                const playButton = document.createElement('div');
-                playButton.classList.add('play-button');
-                playButton.innerHTML = '<i class="fa fa-play"></i>';
-                playButton.addEventListener('click', function() {
-                    playVideo(videoId);
-                });
-                videoBox.appendChild(playButton);
+                    const playButton = document.createElement('div');
+                    playButton.classList.add('play-button');
+                    playButton.innerHTML = '<i class="fa fa-play"></i>';
+                    playButton.addEventListener('click', function() {
+                        playVideo(videoId);
+                    });
+                    videoBox.appendChild(playButton);
 
-                const favoriteButton = document.createElement('div');
-                favoriteButton.classList.add('favorite');
-                favoriteButton.classList.add('selected');
-                favoriteButton.innerHTML = '<i class="fa fa-star"></i>';
-                favoriteButton.addEventListener('click', function() {
-                    toggleFavorite(videoId);
-                    displayFavoriteVideos(); // Atualiza a lista de favoritos após remover
-                });
-                videoBox.appendChild(favoriteButton);
+                    const favoriteButton = document.createElement('div');
+                    favoriteButton.classList.add('favorite');
+                    favoriteButton.classList.add('selected');
+                    favoriteButton.innerHTML = '<i class="fa fa-star"></i>';
+                    favoriteButton.addEventListener('click', function() {
+                        toggleFavorite(videoId);
+                        displayFavoriteVideos(); // Atualiza a lista de favoritos após remover
+                    });
+                    videoBox.appendChild(favoriteButton);
 
-                return videoBox;
+                    return videoBox;
+                } else {
+                    console.error('Vídeo não encontrado:', videoId);
+                    return null;
+                }
             })
             .catch(error => console.error('Erro ao buscar vídeo por ID:', error));
     }
