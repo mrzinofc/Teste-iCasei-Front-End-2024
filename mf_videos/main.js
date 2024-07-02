@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    const API_KEY = 'AIzaSyCdgOWg2049C5NhI6XR7ndr5ymXdBbsB40';
     const searchInput = document.querySelector('.search-box input[type="text"]');
     const videoGrid = document.querySelector('.video-grid');
     const favoriteVideoGrid = document.querySelector('.favorite-video-grid');
@@ -24,8 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para buscar vídeos na API do YouTube
     function searchVideos(query) {
-        const apiKey = 'YOUR_YOUTUBE_API_KEY';
-        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${query}&key=${apiKey}`;
+        const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&q=${query}&key=${API_KEY}`;
         
         fetch(url)
             .then(response => response.json())
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para criar o elemento de vídeo na grade de favoritos
     function createFavoriteVideoBox(videoId) {
-        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=YOUR_YOUTUBE_API_KEY`;
+        const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${API_KEY}`;
         
         return fetch(url)
             .then(response => response.json())

@@ -5,10 +5,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const videoGrid = document.querySelector('.video-grid');
 
     const videos = document.querySelectorAll('.video-box');
-    const favoritesCount = document.querySelector('.favorites-count');
     const favoritesLink = document.querySelector('.link-box a[href="#favorites"]');
     const videosLink = document.querySelector('.link-box a[href="#videos"]');
     let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    // Adiciona o contador no link-box do FAVORITOS
+    const favoritesLinkBox = document.querySelector('.link-box a[href="#favorites"]').parentElement;
+    let favoritesCounter = document.querySelector('.favorites-counter');
+    if (!favoritesCounter) {
+        favoritesCounter = document.createElement('span');
+        favoritesCounter.classList.add('favorites-counter');
+        favoritesLinkBox.appendChild(favoritesCounter);
+    }
 
     // Marcar/desmarcar vídeo como favorito
     videos.forEach((video, idx) => {
@@ -31,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Atualiza o número de favoritos exibido
     function updateFavoritesCount() {
-        favoritesCount.textContent = favorites.length;
+        favoritesCounter.textContent = favorites.length;
         localStorage.setItem('favorites', JSON.stringify(favorites)); // Salva os favoritos no localStorage
         updateFavoritesLink(); // Atualiza o número de favoritos no link do mf_drawer
     }
@@ -96,8 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Atualiza o número de favoritos no link do mf_drawer
     function updateFavoritesLink() {
-        const favoritesLinkCount = document.querySelector('.link-box .favorites-count');
-        favoritesLinkCount.textContent = favorites.length;
+        favoritesCounter.textContent = favorites.length;
     }
 
     // Inicializa o estado inicial dos vídeos (mostrando todos)

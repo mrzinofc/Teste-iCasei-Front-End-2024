@@ -36,8 +36,9 @@ body {
   border: 1px solid #333;
   transition: background-color 0.3s;
   display: flex;
+  position: relative;
   justify-content: center;
-  align-items: center;
+  align-items:center
 }
 
 .link-box a {
@@ -144,6 +145,19 @@ body {
 
 .video-box .favorite.selected {
   color: gold; /* Cor do ícone de favorito quando selecionado */
+}
+
+.favorites-counter {
+  background-color: yellow;
+  border-radius: 50%;
+  padding: 2px 6px;
+  color: black;
+  font-weight: bold;
+  position: absolute;
+  top: 50%;
+  right: 8px; /* Ajuste a distância do lado direito conforme necessário */
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
 @media (max-width: 600px) {
